@@ -113,7 +113,7 @@ class IpAddress
     }
     
     /**
-     * Method detec ip address from request - default is 127.0.0.1 (localhost)
+     * Method detect ip address from request - default is 127.0.0.1 (localhost)
      * 
      * @return \Extlib\System\IpAddress
      */
