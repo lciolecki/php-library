@@ -64,6 +64,7 @@ class Url
      */
     public function setAddress($address)
     {
+        $address = trim($address);
         if (!filter_var($address, FILTER_VALIDATE_URL)) {
             throw new \InvalidArgumentException("$address is not valid format of url address.");
         }

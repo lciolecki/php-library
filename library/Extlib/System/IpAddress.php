@@ -73,6 +73,7 @@ class IpAddress
      */
     public function setAddress($address)
     {
+        $address = trim($address);
         if (!filter_var($address, FILTER_VALIDATE_IP)) {
             throw new \InvalidArgumentException("$address is not valid format of ip address.");
         }
@@ -88,7 +89,7 @@ class IpAddress
      */
     public function isIPv4()
     {
-        return \filter_var($this->getAddress(), FILTER_VALIDATE_IP, FILTER_FLAG_IPV4);
+        return (boolean) \filter_var($this->getAddress(), FILTER_VALIDATE_IP, FILTER_FLAG_IPV4);
     }
 
     /**
@@ -98,7 +99,7 @@ class IpAddress
      */
     public function isIPv6()
     {
-        return \filter_var($this->getAddress(), FILTER_VALIDATE_IP, FILTER_FLAG_IPV6);
+        return (boolean) \filter_var($this->getAddress(), FILTER_VALIDATE_IP, FILTER_FLAG_IPV6);
     }
     
     /**
