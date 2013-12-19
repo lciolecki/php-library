@@ -16,8 +16,5 @@
         "psr-0": {
             "Extlib\\": "library"
         }
-    },
-    "include-path": [
-        "library/"
-    ]
+    }
 }
