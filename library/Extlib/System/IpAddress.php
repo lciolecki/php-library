@@ -13,11 +13,6 @@ namespace Extlib\System;
 class IpAddress
 {
     /**
-     * Default ip address - localhost
-     */
-    const DEFAULT_IP_ADDRESS = '127.0.0.1';
-
-    /**
      * Ip address
      * 
      * @var string 
@@ -54,10 +49,6 @@ class IpAddress
      */
     public function getAddress($ip2long = false)
     {
-        if (null === $this->address) {
-            $this->detect();
-        }
-
         if ($ip2long) {
             return ip2long($this->address);
         }
@@ -74,14 +65,11 @@ class IpAddress
     public function setAddress($address)
     {
         $address = trim($address);
-        if (!filter_var($address, FILTER_VALIDATE_IP)) {
-            throw new \InvalidArgumentException("$address is not valid format of ip address.");
-        }
 
         $this->address = $address;
         return $this;
     }
-
+    
     /**
      * Check if ip address is version 4
      * 
@@ -112,24 +100,11 @@ class IpAddress
     {
         return $this->getAddress(true) === $address->getAddress(true);
     }
-    
-    /**
-     * Method detect ip address from request - default is 127.0.0.1 (localhost)
-     * 
-     * @return \Extlib\System\IpAddress
-     */
-    private function detect()
-    {
-        if (isset($_SERVER['HTTP_CLIENT_IP'])) {
-            $this->address = $_SERVER['HTTP_CLIENT_IP'];
-        } elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            $this->address = trim(end(explode(',', $_SERVER['HTTP_X_FORWARDED_FOR'])));
-        } elseif (isset($_SERVER['REMOTE_ADDR'])) {
-            $this->address = $_SERVER['REMOTE_ADDR'];
-        } else {
-            $this->address = self::DEFAULT_IP_ADDRESS;
-        }
 
-        return $this;
+    static public function isValid($address)
+    {
+        if (!filter_var($address, FILTER_VALIDATE_IP)) {
+            throw new \InvalidArgumentException("$address is not valid format of ip address.");
+        }        
     }
 }
