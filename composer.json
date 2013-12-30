@@ -1,16 +1,19 @@
 {
     "name": "lciolecki/php-library",
     "author": "Łukasz Ciołecki",
-    "description": "PPHP Extlib library",
+    "description": "PHP Extlib library",
     "type": "library",
-    "keywords": [
-        "php",
-        "extlib"
-    ],
-    "homepage": "",
+    "keywords": ["php", "library", "extlib"],
     "license": "BSD-3-Clause",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/lciolecki/Browser.php"
+        }
+    ],
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.3",
+        "cbschuld/browser.php": "dev-master"
     },
     "autoload": {
         "psr-0": {

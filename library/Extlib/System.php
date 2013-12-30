@@ -49,9 +49,9 @@ final class System
     protected $domain = null;
 
     /**
-     * Instance of \Extlib\Browser
+     * Instance of user browser
      *
-     * @var \Extlib\Browser 
+     * @var \Browser
      */
     protected $browser = null;
     
@@ -68,7 +68,8 @@ final class System
     private function __construct()
     {
         $this->server = filter_input_array(INPUT_SERVER);
-        $this->date = new \DateTime('now');
+        $this->setDate(new \DateTime('now'));
+        $this->setBrowser(new \Browser());
 
         $ipAddress = self::DEFAULT_IP;
         if (isset($this->server['HTTP_CLIENT_IP'])) {
@@ -169,5 +170,27 @@ final class System
     public function getDomain()
     {
         return $this->domain;
+    }
+    
+    /**
+     * Set user browser
+     * 
+     * @param \Browser $browser
+     * @return \Extlib\System
+     */
+    public function setBrowser(\Browser $browser)
+    {
+        $this->browser = $browser;
+        return $this;
+    }
+    
+    /**
+     * Get user browser
+     * 
+     * @return \Browser
+     */
+    public function getBrowser()
+    {
+        return $this->browser;
     }
 }
