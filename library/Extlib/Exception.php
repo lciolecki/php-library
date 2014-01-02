@@ -16,7 +16,7 @@ class Exception extends \Exception
      * 
      * @var mixed
      */
-    protected $details = nulll;
+    protected $details = null;
 
     /**
      * Instance of construct
@@ -28,10 +28,7 @@ class Exception extends \Exception
      */
     public function __construct($message, $code = 500, \Exception $previous = null, $details = null)
     {
-        if (null !== $details) {
-            $this->details = $details;
-        }
-
+        $this->setDetails($details);
         parent::__construct($message, $code, $previous);
     }
 
@@ -51,7 +48,7 @@ class Exception extends \Exception
      * @param mixed $details
      * @return \Extlib\Exception
      */
-    public function setDetails($details)
+    public function setDetails($details = null)
     {
         $this->details = $details;
         return $this;
