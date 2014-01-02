@@ -53,6 +53,7 @@ final class Generator
     }
     
     /**
+     * Doctrine v2.x generate method
      * 
      * @param \Doctrine\ORM\EntityManager $entityManager
      * @param string $entityName
