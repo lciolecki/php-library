@@ -3,8 +3,7 @@
 namespace Extlib;
 
 use Extlib\System\IpAddress,
-    Extlib\System\Url,
-    Extlib\System;
+    Extlib\System\Url;
 
 /**
  * Utils class
@@ -53,7 +52,7 @@ final class Utils
      */
     private function __construct()
     {
-        $this->system = System::getInstance();
+        $this->system = \Extlib\System::getInstance();
         $this->ipAddress = new IpAddress();
         $this->urlAddress = new Url();
     }
