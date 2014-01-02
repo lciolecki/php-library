@@ -5,10 +5,10 @@ namespace Extlib\System;
 /**
  * Ip address system element
  *
- * @category        Extlib
- * @package         Extlib\System
- * @author          Lukasz Ciolecki <ciolecki.lukasz@gmail.com> 
- * @copyright       Copyright (c) Lukasz Ciolecki (mart)
+ * @category    Extlib
+ * @package     Extlib\System
+ * @author      Lukasz Ciolecki <ciolecki.lukasz@gmail.com> 
+ * @copyright   Copyright (c) Lukasz Ciolecki (mart)
  */
 class IpAddress
 {
