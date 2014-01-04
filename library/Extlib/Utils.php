@@ -56,6 +56,33 @@ final class Utils
         $this->ipAddress = new IpAddress();
         $this->urlAddress = new Url();
     }
+    
+    /**
+     * Alias for getDomain from Extlib\System\IpAddress
+     * 
+     * @param string $address
+     * @param boolean $scheme
+     * @return string
+     */
+    public function getDomainUrl($address, $scheme = false)
+    {
+        $this->urlAddress->setAddress($address);
+        return $this->urlAddress->getDomain($scheme);
+    }
+
+    /**
+     * Alias for getMd5Address from Extlib\System\IpAddress
+     * 
+     * @param string $addres
+     * @param boolean $scheme
+     * @param boolean $www
+     * @return string
+     */
+    public function getMd5Url($address, $scheme = true, $www = true)
+    {
+        $this->urlAddress->setAddress($address);
+        return $this->urlAddress->getMd5Address($scheme, $www);
+    }
 
     /**
      * Get instance of utils
