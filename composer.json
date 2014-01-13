@@ -5,15 +5,8 @@
     "type": "library",
     "keywords": ["php", "library", "extlib"],
     "license": "BSD-3-Clause",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@github.com:cbschuld/Browser.php.git"
-        }
-    ],
     "require": {
-        "php": ">=5.3.3",
-        "cbschuld/browser.php": "dev-master"
+        "php": ">=5.4"
     },
     "autoload": {
         "psr-0": {
