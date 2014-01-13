@@ -8,7 +8,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/cbschuld/Browser.php"
+            "url": "git@github.com:cbschuld/Browser.php.git"
         }
     ],
     "require": {
