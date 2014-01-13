@@ -3,6 +3,7 @@
 namespace Extlib;
 
 use Extlib\System\IpAddress,
+    Extlib\System\Browser,
     Extlib\System\Url;
 
 /**
@@ -51,7 +52,7 @@ final class System
     /**
      * Instance of user browser
      *
-     * @var \Browser
+     * @var \Extlib\System\Browser
      */
     protected $browser = null;
     
@@ -69,7 +70,7 @@ final class System
     {
         $this->server = filter_input_array(INPUT_SERVER);
         $this->setDate(new \DateTime('now'));
-        $this->setBrowser(new \Browser());
+        $this->setBrowser(new Browser());
 
         $ipAddress = self::DEFAULT_IP;
         if (isset($this->server['HTTP_CLIENT_IP'])) {
@@ -175,10 +176,10 @@ final class System
     /**
      * Set user browser
      * 
-     * @param \Browser $browser
+     * @param \Extlib\System\Browser $browser
      * @return \Extlib\System
      */
-    public function setBrowser(\Browser $browser)
+    public function setBrowser(\Extlib\System\Browser $browser)
     {
         $this->browser = $browser;
         return $this;
@@ -187,7 +188,7 @@ final class System
     /**
      * Get user browser
      * 
-     * @return \Browser
+     * @return \Extlib\System\Browser
      */
     public function getBrowser()
     {
