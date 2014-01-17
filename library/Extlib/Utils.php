@@ -17,7 +17,7 @@ final class Utils
     /**
      * Sign code namespace
      */
-    const SIGN_NAMESPACE = 'sing';
+    const SIGN_NAMESPACE = 'sign';
 
     /**
      * Instance of ip address obejct
