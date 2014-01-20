@@ -93,8 +93,6 @@ final class Generator
             return (boolean) $return->count();
         }
         
-        
-        
         do {
             $generate = self::generate($length);
         } while (query($modelName, $field, $generate));
