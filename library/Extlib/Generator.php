@@ -71,6 +71,36 @@ final class Generator
         
         return $generate;
     }
+    
+    /**
+     * Phalcon ORM generate method
+     * 
+     * @param \Phalcon\Mvc\Model\Criteria $query
+     * @param string $field
+     * @param int $length
+     * @return string
+     */
+    static public function generatePhalcon($modelName, $field, $length = 16)
+    {
+        function query($modelName, $field, $generate)
+        {
+            $return = \Phalcon\Mvc\Model::query()
+                                        ->setModelName($modelName)
+                                        ->where("$field = :value:")
+                                        ->bind(array('value' => $generate))
+                                        ->execute();
+            
+            return (boolean) $return->count();
+        }
+        
+        
+        
+        do {
+            $generate = self::generate($length);
+        } while (query($modelName, $field, $generate));
+        
+        return $generate;
+    }
 
     /**
      * Generate random string
