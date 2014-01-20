@@ -75,7 +75,7 @@ final class Generator
     /**
      * Phalcon ORM generate method
      * 
-     * @param \Phalcon\Mvc\Model\Criteria $query
+     * @param string $modelName
      * @param string $field
      * @param int $length
      * @return string
