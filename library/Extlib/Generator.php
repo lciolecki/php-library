@@ -82,22 +82,30 @@ final class Generator
      */
     static public function generatePhalcon($modelName, $field, $length = 16)
     {
-        function query($modelName, $field, $generate)
-        {
-            $return = \Phalcon\Mvc\Model::query()
-                                        ->setModelName($modelName)
-                                        ->where("$field = :value:")
-                                        ->bind(array('value' => $generate))
-                                        ->execute();
-            
-            return (boolean) $return->count();
-        }
-        
         do {
             $generate = self::generate($length);
-        } while (query($modelName, $field, $generate));
+        } while (self::phalconQuery($modelName, $field, $generate));
         
         return $generate;
+    }
+    
+    /**
+     * Phalcon generate query
+     * 
+     * @param string $modelName
+     * @param string $field
+     * @param string $generate
+     * @return int
+     */
+    static protected function phalconQuery($modelName, $field, $generate)
+    {
+        $return = \Phalcon\Mvc\Model::query()
+                                    ->setModelName($modelName)
+                                    ->where("$field = :value:")
+                                    ->bind(array('value' => $generate))
+                                    ->execute();
+
+        return (boolean) $return->count();
     }
 
     /**
