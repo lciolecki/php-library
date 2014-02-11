@@ -45,9 +45,7 @@ final class Generator
     {
         do {
             $generate = self::generate($length);
-        } while (function($tableName, $field, $generate) {
-            return \Doctrine_Query::create()->from($tableName)->where("$field = ?", $generate)->fetchOne();
-        });
+        } while (self::doctrineQuery($tableName, $field, $generate));
         
         return $generate;
     }
@@ -106,6 +104,22 @@ final class Generator
                                     ->execute();
 
         return (boolean) $return->count();
+    }
+    
+    /**
+     * Doctgrine ORM v1.2 generate query
+     * 
+     * @param string $tableName
+     * @param string $field
+     * @param string $generate
+     * @return int
+     */
+    static protected function doctrineQuery($tableName, $field, $generate)
+    {
+        return \Doctrine_Query::create()
+                              ->select($field)
+                               ->from($tableName)->where("$field = ?", $generate)
+                               ->execute(array(), \Doctrine_Core::HYDRATE_SINGLE_SCALAR);
     }
 
     /**
