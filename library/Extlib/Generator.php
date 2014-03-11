@@ -60,12 +60,10 @@ final class Generator
      * @return string
      */
     static public function generateDoctrine2(\Doctrine\ORM\EntityManager $entityManager, $entityName, $field, $length = 16)
-    {        
+    {    
         do {
             $generate = self::generate($length);
-        } while (function(\Doctrine\ORM\EntityManager $entityManager, $entityName, $field, $generate) {
-            return $entityManager->getRepository($entityName)->findOneBy(array($field => $generate));
-        });
+        } while (self::doctrine2Query($entityManager, $entityName, $field, $generate));
         
         return $generate;
     }
@@ -118,8 +116,30 @@ final class Generator
     {
         return \Doctrine_Query::create()
                               ->select($field)
-                               ->from($tableName)->where("$field = ?", $generate)
-                               ->execute(array(), \Doctrine_Core::HYDRATE_SINGLE_SCALAR);
+                              ->from($tableName)->where("$field = ?", $generate)
+                              ->execute(array(), \Doctrine_Core::HYDRATE_SINGLE_SCALAR);
+    }
+
+    /**
+     * Doctgrine ORM v2 generate query
+     * 
+     * @param \Doctrine\ORM\EntityManager $entityManager
+     * @param type $entityName
+     * @param type $field
+     * @param type $generate
+     * @return mixed
+     */
+    static protected function doctrine2Query(\Doctrine\ORM\EntityManager $entityManager, $entityName, $field, $generate)
+    {
+        $result = $entityManager->createQueryBuilder()
+                                ->select("entity.$field")
+                                ->from($entityName, 'entity')
+                                ->where("entity.$field = :$field")
+                                ->setParameter("$field", $generate)
+                                ->getQuery()
+                                ->getResult();
+        
+        return !empty($result);
     }
 
     /**
