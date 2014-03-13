@@ -70,7 +70,9 @@ final class System
     {
         $this->server = filter_input_array(INPUT_SERVER);
         $this->setDate(new \DateTime('now'));
-        $this->setBrowser(new Browser());
+        $browser = new Browser();
+        $browser->Browser();
+        $this->setBrowser($browser);
 
         $ipAddress = self::DEFAULT_IP;
         if (isset($this->server['HTTP_CLIENT_IP'])) {

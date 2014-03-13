@@ -193,7 +193,7 @@ final class Cookie
      */
     static function set($namespace, $value, $expire = 0, $path = null, $domain = null, $secure = false, $httponly = false)
     {
-        \setCookie($namespace, $value, $expire, $path, $domain, $secure, $httponly);
+        setcookie($namespace, $value, $expire, $path, $domain, $secure, $httponly);
     }
 
     /**

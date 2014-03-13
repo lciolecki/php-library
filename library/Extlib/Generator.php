@@ -45,9 +45,7 @@ final class Generator
     {
         do {
             $generate = self::generate($length);
-        } while (function($tableName, $field, $generate) {
-            return \Doctrine_Query::create()->from($tableName)->where("$field = ?", $generate)->fetchOne();
-        });
+        } while (self::doctrineQuery($tableName, $field, $generate));
         
         return $generate;
     }
@@ -62,14 +60,86 @@ final class Generator
      * @return string
      */
     static public function generateDoctrine2(\Doctrine\ORM\EntityManager $entityManager, $entityName, $field, $length = 16)
-    {        
+    {    
         do {
             $generate = self::generate($length);
-        } while (function(\Doctrine\ORM\EntityManager $entityManager, $entityName, $field, $generate) {
-            return $entityManager->getRepository($entityName)->findOneBy(array($field => $generate));
-        });
+        } while (self::doctrine2Query($entityManager, $entityName, $field, $generate));
         
         return $generate;
+    }
+    
+    /**
+     * Phalcon ORM generate method
+     * 
+     * @param string $modelName
+     * @param string $field
+     * @param int $length
+     * @return string
+     */
+    static public function generatePhalcon($modelName, $field, $length = 16)
+    {
+        do {
+            $generate = self::generate($length);
+        } while (self::phalconQuery($modelName, $field, $generate));
+        
+        return $generate;
+    }
+    
+    /**
+     * Phalcon generate query
+     * 
+     * @param string $modelName
+     * @param string $field
+     * @param string $generate
+     * @return int
+     */
+    static protected function phalconQuery($modelName, $field, $generate)
+    {
+        $return = \Phalcon\Mvc\Model::query()
+                                    ->setModelName($modelName)
+                                    ->where("$field = :value:")
+                                    ->bind(array('value' => $generate))
+                                    ->execute();
+
+        return (boolean) $return->count();
+    }
+    
+    /**
+     * Doctgrine ORM v1.2 generate query
+     * 
+     * @param string $tableName
+     * @param string $field
+     * @param string $generate
+     * @return int
+     */
+    static protected function doctrineQuery($tableName, $field, $generate)
+    {
+        return \Doctrine_Query::create()
+                              ->select($field)
+                              ->from($tableName)->where("$field = ?", $generate)
+                              ->execute(array(), \Doctrine_Core::HYDRATE_SINGLE_SCALAR);
+    }
+
+    /**
+     * Doctgrine ORM v2 generate query
+     * 
+     * @param \Doctrine\ORM\EntityManager $entityManager
+     * @param type $entityName
+     * @param type $field
+     * @param type $generate
+     * @return mixed
+     */
+    static protected function doctrine2Query(\Doctrine\ORM\EntityManager $entityManager, $entityName, $field, $generate)
+    {
+        $result = $entityManager->createQueryBuilder()
+                                ->select("entity.$field")
+                                ->from($entityName, 'entity')
+                                ->where("entity.$field = :$field")
+                                ->setParameter("$field", $generate)
+                                ->getQuery()
+                                ->getResult();
+        
+        return !empty($result);
     }
 
     /**
