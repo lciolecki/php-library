@@ -292,4 +292,36 @@ final class Utils
                 break;
         }
     }
+    
+    /**
+     * Filter url address by params (scheme, www)
+     * 
+     * @param string $url
+     * @param boolean $withScheme
+     * @param boolean $withWWW
+     * @return string
+     */
+    static public function filterUrl($url, $withScheme = true, $withWWW = true)
+    {
+        $info = parse_url($url);
+        if (false === $info || $url === null) {
+            return $url;
+        }
+        
+        $scheme = isset($info['scheme']) ? $info['scheme'] : null;
+        $host = isset($info['host']) ? $info['host'] : $info['path'];
+
+        $address = $url;
+        if ($withScheme && null === $scheme) {
+            $address = sprintf('http://%s', $url);
+        } elseif (!$withScheme && $scheme) {
+            $address = str_replace($scheme . '://', '', $url);
+        }
+
+        if (false === $withWWW && 0 === strpos($host, 'www.')) {
+            $address = substr($address, 4);
+        }
+
+        return $address;
+    }
 }
