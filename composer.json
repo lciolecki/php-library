@@ -5,9 +5,6 @@
     "type": "library",
     "keywords": ["php", "library", "extlib"],
     "license": "BSD-3-Clause",
-    "require": {
-        "php": ">=5.4"
-    },
     "autoload": {
         "psr-0": {
             "Extlib\\": "library"
