@@ -1,12 +1,5 @@
-php-library
+PHP Extlib libray
 ===========
-
-PHP Extlib library
-
-zf-extensions-library
-=====================
-
-Extensions library for Zend Framework v1
 
 ##Installation using Composer
 
