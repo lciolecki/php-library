@@ -77,7 +77,7 @@ final class FileManager
         do {
             $name = \Extlib\Generator::generate($length);
             $dir = rtrim($directory, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $name ;
-        } while (is_dir($filepath));
+        } while (is_dir($dir));
 
         return $dir;
     }
