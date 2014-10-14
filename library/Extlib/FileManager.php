@@ -79,7 +79,7 @@ final class FileManager
             $dir = rtrim($directory, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $name ;
         } while (is_dir($dir));
 
-        return $dir;
+        return $name;
     }
 
     /**
