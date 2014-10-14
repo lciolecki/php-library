@@ -28,6 +28,7 @@ final class FileManager
 
         if (!is_dir($directory)) {
             umask(0000);
+
             if (@mkdir($directory, 0777, true) === false) {
                 throw new Exception(sprintf('Directory "%s" cannot be created.', $directory));
             }
@@ -62,6 +63,23 @@ final class FileManager
         } while (file_exists($filepath));
 
         return sprintf('%s.%s', $name, $extension);
+    }
+
+    /**
+     * Return unique dirname
+     *
+     * @param string $directory
+     * @param int $length
+     * @return string
+     */
+    static public function generateDir($directory, $length)
+    {
+        do {
+            $name = \Extlib\Generator::generate($length);
+            $dir = rtrim($directory, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $name ;
+        } while (is_dir($filepath));
+
+        return $dir;
     }
 
     /**
