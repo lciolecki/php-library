@@ -72,7 +72,7 @@ final class FileManager
      * @param int $length
      * @return string
      */
-    static public function generateDir($directory, $length)
+    static public function generateDir($directory, $length = 16)
     {
         do {
             $name = \Extlib\Generator::generate($length);
