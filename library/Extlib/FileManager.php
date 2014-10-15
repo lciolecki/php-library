@@ -27,11 +27,11 @@ final class FileManager
         }
 
         if (!is_dir($directory)) {
-            umask(0000);
-
+            $umask = umask(0000);
             if (@mkdir($directory, 0777, true) === false) {
                 throw new Exception(sprintf('Directory "%s" cannot be created.', $directory));
             }
+            umask($umask);
         }
 
         return $directory;
