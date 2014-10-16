@@ -62,22 +62,7 @@ final class FileManager
             $filepath = rtrim($directory, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . sprintf('%s.%s', $name, $extension);
         } while (file_exists($filepath));
 
-        return sprintf('%s.%s', $name, $extension);
-    }
-
-    /**
-     * Return unique dirname
-     *
-     * @param string $directory
-     * @param int $length
-     * @return string
-     */
-    static public function generateDir($directory, $length = 16)
-    {
-        do {
-            $name = \Extlib\Generator::generate($length);
-            $dir = rtrim($directory, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $name ;
-        } while (is_dir($dir));
+        return sprintfdir));
 
         return $name;
     }
@@ -137,9 +122,9 @@ final class FileManager
             return unlink($path);
         }
 
-        $scan = glob(rtrim($path, '/') . '/*');
-        foreach ($scan as $path) {
-            self::recursiveDelete($path);
+        $scans = glob(rtrim($path, '/') . '/*');
+        foreach ($scans as $scan) {
+            self::recursiveDelete($scan);
         }
 
         return rmdir($path);
