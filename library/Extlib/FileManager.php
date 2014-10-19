@@ -62,8 +62,6 @@ final class FileManager
             $filepath = rtrim($directory, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . sprintf('%s.%s', $name, $extension);
         } while (file_exists($filepath));
 
-        return sprintfdir));
-
         return $name;
     }
 
