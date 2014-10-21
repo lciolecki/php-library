@@ -66,6 +66,23 @@ final class FileManager
     }
 
     /**
+     * Generate directory
+     *
+     * @param $directory
+     * @param int $length
+     * @return string
+     */
+    static public function generateDir($directory, $length = 8)
+    {
+        do {
+            $name = \Extlib\Generator::generate($length);
+            $filepath = rtrim($directory, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $name;
+        } while (is_dir($filepath));
+
+        return $name;
+    }
+
+    /**
      * Remove file by path
      * 
      * @param string $filename
