@@ -164,7 +164,7 @@ class Url
         }
 
         if (false === $www && 0 === strpos($this->get(self::PARSE_HOST), 'www.')) {
-            $address = substr($this->address, 4);
+            $address = substr($address, 4);
         }
 
         return $address;
