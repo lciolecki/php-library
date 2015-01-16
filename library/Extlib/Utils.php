@@ -318,8 +318,8 @@ final class Utils
             $address = str_replace($scheme . '://', '', $url);
         }
 
-        if (false === $withWWW && 0 === strpos($host, 'www.')) {
-            $address = substr($address, 4);
+        if (false === $withWWW) {
+            return preg_replace('#^www\.(.+\.)#i', '$1', $address);
         }
 
         return $address;
