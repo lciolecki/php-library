@@ -87,9 +87,7 @@ final class System
 
         $domain = self::DEFAULT_DOMAIN;
         if (isset($this->server['HTTP_HOST'])) {
-            $domain = isset($this->server['HTTPS']) 
-                    ? 'https:' : 'http:' . '//' 
-                    . $this->server['HTTP_HOST'];
+            $domain = (isset($this->server['HTTPS']) ? 'https://' : 'http://') . $this->server['HTTP_HOST'];
         } 
         
         $this->setDomain(new Url($domain));
